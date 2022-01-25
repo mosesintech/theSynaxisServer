@@ -1,0 +1,73 @@
+{
+  "name": "thesynaxisserver",
+  "version": "1.0.0",
+  "description": "Server for TheSynaxis",
+  "main": "index.js",
+  "scripts": {
+    "dev": "NODE_ENV=development nodemon index.js",
+    "start": "NODE_ENV=production node index.js",
+    "commit": "cz",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/mosesintech/theSynaxisServer.git"
+  },
+  "keywords": [
+    "orthodox",
+    "christian",
+    "api",
+    "quotes",
+    "scripture"
+  ],
+  "author": "@mosesintech",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/mosesintech/theSynaxisServer/issues"
+  },
+  "homepage": "https://github.com/mosesintech/theSynaxisServer#readme",
+  "devDependencies": {
+    "commitizen": "^4.2.4",
+    "cz-conventional-changelog": "^3.3.0",
+    "nodemon": "^2.0.15"
+  },
+  "dependencies": {
+    "dotenv": "^14.3.0",
+    "express": "^4.17.2"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog",
+      "types": {
+        "feat": {
+          "description": "A new feature",
+          "title": "Features"
+        },
+        "fix": {
+          "description": "A bug fix",
+          "title": "Bug Fixes"
+        },
+        "docs": {
+          "description": "Documentation only changes",
+          "title": "Documentation"
+        },
+        "style": {
+          "description": "Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)",
+          "title": "Styles"
+        },
+        "refactor": {
+          "description": "A code change that neither fixes a bug nor adds a feature",
+          "title": "Code Refactoring"
+        },
+        "test": {
+          "description": "Adding missing tests or correcting existing tests",
+          "title": "Tests"
+        },
+        "chore": {
+          "description": "Other changes that don't modify src or test files",
+          "title": "Chores"
+        }
+      }
+    }
+  }
+}
