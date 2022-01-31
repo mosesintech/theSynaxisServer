@@ -52,6 +52,11 @@ Additionally, I added a .nvmrc file for future development.
 Next I added eslint and prettier and configured them to work with Typescript.
 I'm pretty proud of this one, because linters can be finicky and this didn't take me too long to do.
 
+Lastly, I added jest and configured it for Typescript work as well.
+Definitely a good skeleton to begin working with.
+The idea is to build this server with Test Driven Development.
+This plus Typescript should save me from all kinds of messy bugs, as well as help me to write beautiful code.
+
 npm packages added:
     - typescript
     - @types/node
@@ -59,16 +64,24 @@ npm packages added:
     - @types/cors
     - @typescript-eslint/eslint-plugin
     - @typescript-eslint/parser
+    - @types/jest
     - concurrently
     - body-parser-graphql
     - cross-env
     - cors
     - eslint
     - prettier
+    - jest
+    - ts-jest
+    - supertest
 
 files added:
     - .nvmrc
     - index.js => index.ts
     - /server/index.ts
     - tsconfig.json
-    - eslintrc.json
+    - .eslintrc.json
+    - .prettierrc.json
+    - .prettierignore
+    - .eslintignore
+    - .editorcongig

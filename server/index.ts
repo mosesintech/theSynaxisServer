@@ -5,7 +5,11 @@ import helmet from 'helmet';
 import { bodyParserGraphQL } from 'body-parser-graphql';
 
 const app: Express = express();
-const serverOnMessage = (req: Request, res: Response, next: NextFunction) => {
+const serverOnMessage = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): void => {
   res.status(200);
   res.send('Welcome to The Synaxis Server.');
   next();
@@ -17,5 +21,8 @@ app.use(bodyParserGraphQL());
 app.get('/', serverOnMessage);
 
 export const port = process.env.PORT || 9999;
+export const add = (a: number, b: number) => {
+  return a + b;
+};
 
 export default app;
