@@ -85,3 +85,21 @@ files added:
     - .prettierignore
     - .eslintignore
     - .editorcongig
+    - __tests__/index.spec.ts
+    - jest.config.js
+
+### January 31, 2022 - Monday
+
+Today I added husky & lint-staged to make sure all my code is formatted correctly and that I'm passing testing thresholds before pushing.
+
+Winston is another cool package I only just ran across.
+It's a logging package that handles all the tough parts of building your own logging library.
+
+npm packages added:
+    - husky
+    - lint-staged
+    - winston
+    - @types/winston
+
+files added:
+    - .husky/pre-commit

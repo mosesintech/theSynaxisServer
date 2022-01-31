@@ -10,11 +10,19 @@
     "prestart": "npm run build",
     "start": "cross-env NODE_ENV=production node dist/index.js",
     "test": "jest --runInBand",
+    "test:cov": "jest --runInBand --coverage",
     "prettier": "prettier --write '**/*.ts'",
     "lint": "eslint '**/*.ts'",
     "lint:fix": "npm run lint -- --fix",
     "format": "npm run prettier && npm run lint:fix",
+    "prepare": "npm run format && npm run test:cov",
+    "husky-lint": "npm run prepare",
     "commit": "cz"
+  },
+  "lint-staged": {
+    "src/**/*.ts": [
+      "npm run prepare"
+    ]
   },
   "repository": {
     "type": "git",
@@ -51,7 +59,9 @@
     "eslint-import-resolver-typescript": "^2.5.0",
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-prettier": "^4.0.0",
+    "husky": "^7.0.4",
     "jest": "^27.4.7",
+    "lint-staged": "^12.3.2",
     "nodemon": "^2.0.15",
     "prettier": "^2.5.1",
     "supertest": "^6.2.2",
