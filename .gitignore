@@ -6,3 +6,6 @@ dist
 
 # env
 .env
+
+# coverage
+coverage
