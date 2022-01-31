@@ -49,16 +49,26 @@ This way, I can run `tsc --watch` with `nodemon dist/index.js` so I can get imme
 
 Additionally, I added a .nvmrc file for future development.
 
+Next I added eslint and prettier and configured them to work with Typescript.
+I'm pretty proud of this one, because linters can be finicky and this didn't take me too long to do.
+
 npm packages added:
     - typescript
     - @types/node
     - @types/express
+    - @types/cors
+    - @typescript-eslint/eslint-plugin
+    - @typescript-eslint/parser
     - concurrently
     - body-parser-graphql
     - cross-env
+    - cors
+    - eslint
+    - prettier
 
 files added:
     - .nvmrc
     - index.js => index.ts
     - /server/index.ts
     - tsconfig.json
+    - eslintrc.json

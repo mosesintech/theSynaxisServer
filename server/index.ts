@@ -1,13 +1,21 @@
-import express, { Request, Response, NextFunction } from 'express'
+import 'dotenv/config';
+import express, { Express, Request, Response, NextFunction } from 'express';
+import cors from 'cors';
+import helmet from 'helmet';
+import { bodyParserGraphQL } from 'body-parser-graphql';
 
-const app = express();
+const app: Express = express();
 const serverOnMessage = (req: Request, res: Response, next: NextFunction) => {
-    res.status(200);
-    res.send('Welcome to The Synaxis Server.');
-}
+  res.status(200);
+  res.send('Welcome to The Synaxis Server.');
+  next();
+};
 
+app.use(cors());
+app.use(helmet());
+app.use(bodyParserGraphQL());
 app.get('/', serverOnMessage);
 
-export const port = process.env.PORT || 9999
+export const port = process.env.PORT || 9999;
 
 export default app;
