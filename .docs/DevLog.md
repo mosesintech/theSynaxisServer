@@ -108,3 +108,20 @@ npm packages added:
 files added:
     - .husky/pre-commit
     - Procfile
+
+## February
+
+### February 1, 2022 - Tuesday
+
+This one was difficult.
+Today's objective was to begin working with Knex and Postgres.
+Because of my lack of familiarity with Typescript, I spent a good amount of time trying to make Knex work.
+Most of what I found online didn't exactly solve my issues, but I am proud of what I was able to do in the end.
+I'll probably publish the knexfile on it's own in a blog to help others who are going through this issue, and maybe even draw out an even better solution from more senior devs.
+
+npm packages added:
+    - knex
+    - pg
+
+files added:
+    - .husky/pre-commit

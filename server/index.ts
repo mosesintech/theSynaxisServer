@@ -21,8 +21,5 @@ app.use(bodyParserGraphQL());
 app.get('/', serverOnMessage);
 
 export const port = process.env.PORT || 9999;
-export const add = (a: number, b: number) => {
-  return a + b;
-};
 
 export default app;
