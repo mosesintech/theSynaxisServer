@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Server for The Synaxis",
   "main": "dist/index.js",
+  "engines": {
+    "node": "17.3.0"
+  },
   "scripts": {
     "build": "rimraf dist && tsc",
     "predev": "npm run build",
