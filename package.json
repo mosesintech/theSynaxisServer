@@ -2,7 +2,7 @@
   "name": "thesynaxisserver",
   "version": "1.0.0",
   "description": "Server for The Synaxis",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "build": "rimraf dist && tsc",
     "predev": "npm run build",
