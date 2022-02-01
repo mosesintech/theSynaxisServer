@@ -95,6 +95,10 @@ Today I added husky & lint-staged to make sure all my code is formatted correctl
 Winston is another cool package I only just ran across.
 It's a logging package that handles all the tough parts of building your own logging library.
 
+I also added a few details so I could deploy the server on Heroku for staging.
+I think I'm going to want to use Digital Ocean for production.
+But Heroku is perfect for staging, it being free and all.
+
 npm packages added:
     - husky
     - lint-staged
@@ -103,3 +107,4 @@ npm packages added:
 
 files added:
     - .husky/pre-commit
+    - Procfile
