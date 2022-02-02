@@ -23,7 +23,7 @@ const development: Knex.Config = {
 const test: Knex.Config = {
   client: 'pg',
   connection: {
-    database: `${process.env.DATABASE_NAME}`,
+    database: `${process.env.DATABASE_TEST}`,
     // hostname: 'localhost',
   },
   migrations: {
