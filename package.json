@@ -18,13 +18,13 @@
     "lint": "eslint '**/*.ts'",
     "lint:fix": "npm run lint -- --fix",
     "format": "npm run prettier && npm run lint:fix",
-    "prepare": "npm run format && npm run test:cov",
-    "husky-lint": "npm run prepare",
+    "predeploy": "npm run format && npm run test:cov",
+    "husky-lint": "npm run predeploy",
     "commit": "cz"
   },
   "lint-staged": {
     "src/**/*.ts": [
-      "npm run prepare"
+      "npm run predeploy"
     ]
   },
   "repository": {

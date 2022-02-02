@@ -37,9 +37,7 @@ const test: Knex.Config = {
 const staging: Knex.Config = {
   client: 'pg',
   connection: {
-    database: `${process.env.DATABASE_NAME}`,
-    user: `${process.env.DATABASE_USER}`,
-    password: `${process.env.DATABASE_PASSWORD}`,
+    connectionString: process.env.DATABASE_URL,
   },
   pool: {
     min: 2,
