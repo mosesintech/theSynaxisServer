@@ -6,5 +6,8 @@ before_script:
 script:
   - npm install
   - npm run coveralls
+env:
+  global:
+    - DATABASE_TEST=test_db
 notifications:
   slack: synaxisworkspace:Xw0MSErrrNIbV0CauFzaPHho
