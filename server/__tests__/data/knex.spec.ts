@@ -1,4 +1,4 @@
-import knex from '../../../server/data/dbConfig';
+import knex from '../../data/dbConfig';
 
 describe('Database Connection', () => {
   test('ENV Should be Test', async () => {

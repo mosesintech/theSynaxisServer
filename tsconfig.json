@@ -10,6 +10,6 @@
     "skipLibCheck": true,
     "outDir": "dist",
   },
-  "exclude": ["__tests__"],
+  "exclude": ["server/__tests__"],
   "lib": ["es2015"]
 }

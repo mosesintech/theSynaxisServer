@@ -20,6 +20,6 @@ app.use(helmet());
 app.use(bodyParserGraphQL());
 app.get('/', serverOnMessage);
 
-export const port = process.env.PORT || 9999;
+export const port = process.env.PORT;
 
 export default app;
