@@ -144,3 +144,7 @@ npm packages added:
 files added:
     - .husky/pre-commit
     - .travis.yml
+    - knexfile.ts
+    - server/data
+      - migrations/20220201153947_create_saints.ts
+      - dbConfig.ts

@@ -11,3 +11,14 @@
 </p>
 
 The Synaxis is a collection of apps for Orthodox Christians.
+
+<h2 align="center">About The Synaxis Server</h2>
+
+### Development Roadmap
+
+If you'd like to, you can check out our roadmap here: <a href="/.docs/Roadmap.md">Roadmap.md</a>
+
+### Development Log
+
+I'm keeping a log of daily development.
+If want to check that out, it's here: <a href="/.docs/DevLog.md">DevLog.md</a>
