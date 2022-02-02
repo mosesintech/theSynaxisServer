@@ -119,9 +119,28 @@ Because of my lack of familiarity with Typescript, I spent a good amount of time
 Most of what I found online didn't exactly solve my issues, but I am proud of what I was able to do in the end.
 I'll probably publish the knexfile on it's own in a blog to help others who are going through this issue, and maybe even draw out an even better solution from more senior devs.
 
+To finish out my day on a strong note, I integrated Travis CI and Coveralls.
+This is cool for a few reasons:
+First, I like having test coverage reports, especially if I'm developing this with TDD.
+This way I know, and I can brag about test coverage with a fancy button in my README.
+Secondly, it's really good to know if any tests are failing outside of my local environment.
+
+I feel really confident about this project now.
+I've got eslint, prettier, and jest playing nice together.
+The server is deployed on Heroku and is using Travis CI/Coveralls as well.
+All that's left is to actually build something beautiful.
+
+Tomorrow's object, if I have time, is to build out the data model.
+I like the idea of having one file handle all of the data access for the server, so I don't have to rewrite many of the same functions for different types of data.
+After this, I'll add GraphQL.
+I'm wanting to pay special attention to how I handle errors with this project.
+Logging is another thing I don't want to forget.
+
 npm packages added:
     - knex
     - pg
+    - coveralls
 
 files added:
     - .husky/pre-commit
+    - .travis.yml
