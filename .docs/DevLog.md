@@ -37,6 +37,7 @@ files added:
         - DevLog.md
         - Tech.md
 
+
 ### January 30, 2022 - Sunday
 
 Today I worked on putting together a simple Node/Express server and all everything needed to get started with Typescript.
@@ -88,6 +89,7 @@ files added:
     - __tests__/index.spec.ts
     - jest.config.js
 
+
 ### January 31, 2022 - Monday
 
 Today I added husky & lint-staged to make sure all my code is formatted correctly and that I'm passing testing thresholds before pushing.
@@ -108,6 +110,7 @@ npm packages added:
 files added:
     - .husky/pre-commit
     - Procfile
+
 
 ## February
 
@@ -148,3 +151,21 @@ files added:
     - server/data
       - migrations/20220201153947_create_saints.ts
       - dbConfig.ts
+
+
+### February 3 2022 - Thursday
+Today I started with adding seeds for testing.
+Then, like I said yesterday, I did work on the dataModel functions.
+
+Sidenote: I added date-fns to the project because I heard it was a better way of handling dates than moment.
+
+A cool thing I found out while I worked on this was that I didn't have to write test cases for when arguments are missing when using a function that needs them.
+It simply doesn't compile.
+I love that.
+
+npm packages added:
+    - date-fns
+
+files added:
+    - server/data/seeds/000-saints.ts
+    - server/data/dataModel.ts
