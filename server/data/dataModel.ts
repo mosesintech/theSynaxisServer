@@ -1,16 +1,22 @@
 import db from './dbConfig';
 
-type Params = { [k: string]: string | number };
+type ItemInput = { [k: string]: string | number | boolean | undefined };
 
-export function findAll(table: string) {
-  return db(table)
+interface ItemOutput {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [k: string]: any;
+}
+
+export async function findAll(table: string): Promise<ItemOutput> {
+  const items = await db(table)
     .then()
     .catch((err) => {
       throw new Error(`Error retreiving items: ${err}`);
     });
+  return items;
 }
 
-export async function findOne(table: string, id: number) {
+export async function findOne(table: string, id: number): Promise<ItemOutput> {
   const item = await db(table)
     .where({ id })
     .first()
@@ -24,7 +30,10 @@ export async function findOne(table: string, id: number) {
   return item;
 }
 
-export async function addOne(table: string, newItem: Params) {
+export async function addOne(
+  table: string,
+  newItem: ItemInput
+): Promise<ItemOutput> {
   const [{ id }] = await db(table)
     .insert(newItem, 'id')
     .then()
@@ -36,8 +45,8 @@ export async function addOne(table: string, newItem: Params) {
 
 export async function updateOne(
   table: string,
-  updatedItem: Params
-): Promise<Params> {
+  updatedItem: ItemInput
+): Promise<ItemOutput> {
   const { id } = updatedItem;
   await db(table)
     .update(updatedItem)
@@ -50,7 +59,10 @@ export async function updateOne(
   return findOne(table, Number(id));
 }
 
-export async function deleteOne(table: string, id: number): Promise<Params> {
+export async function deleteOne(
+  table: string,
+  id: number
+): Promise<ItemOutput> {
   const item = await findOne(table, id);
   if (item.is_deleted) {
     throw new Error(`Item already deleted`);
@@ -62,7 +74,10 @@ export async function deleteOne(table: string, id: number): Promise<Params> {
   return findOne(table, id);
 }
 
-export async function restoreOne(table: string, id: number): Promise<Params> {
+export async function restoreOne(
+  table: string,
+  id: number
+): Promise<ItemOutput> {
   const item = await findOne(table, id);
   if (!item.is_deleted) {
     throw new Error(`Item not deleted`);
