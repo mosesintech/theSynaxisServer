@@ -6,6 +6,10 @@ import {
   deleteOne,
   restoreOne,
 } from '../../data/dataModel';
+import {
+  DbToGQLTransformSaintData,
+  GQLToDbTransformSaintData,
+} from './saintsFunctions';
 
 type Saint = { [key: string]: undefined | number | string | boolean };
 
@@ -19,34 +23,72 @@ interface SaintInput extends Saint {
   feast_date?: string;
   is_bc?: boolean;
   is_martyr?: boolean;
-  is_patriarch?: boolean;
+  is_confessor?: boolean;
+  is_Patriarch?: boolean;
   is_bishop?: boolean;
   is_priest?: boolean;
   is_deacon?: boolean;
   is_monk?: boolean;
+  is_married?: boolean;
   is_male?: boolean;
 }
 
-interface SaintOutPut extends SaintInput {
-  created_at?: string;
-  modified_at?: string;
-  is_deleted?: boolean;
+interface SaintOutPut extends Saint {
+  id?: number;
+  name?: string;
+  life?: string;
+  born?: string;
+  died?: string;
+  feastMonth?: string;
+  feastDate?: string;
+  isBc?: boolean;
+  isMartyr?: boolean;
+  isConfessor?: boolean;
+  isPatriarch?: boolean;
+  isBishop?: boolean;
+  isPriest?: boolean;
+  isDeacon?: boolean;
+  isMonk?: boolean;
+  isMarried?: boolean;
+  isMale?: boolean;
+  createdAt?: string;
+  modifiedAt?: string;
+  isDeleted?: boolean;
 }
 
-export function getSaints() {
-  return findAll('saints');
+export async function getSaints() {
+  const saints = await findAll('saints');
+  const transformedSaints = saints.map((saint: SaintInput) => {
+    const transformedSaint = DbToGQLTransformSaintData(saint);
+    return transformedSaint;
+  });
+  return transformedSaints;
 }
 
-export function getSaint(id: number): Promise<SaintOutPut> {
-  return findOne('saints', id);
+export async function getSaint(id: number): Promise<SaintOutPut> {
+  let saint = {};
+  try {
+    saint = await findOne('saints', id);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
+    throw new Error(`Saint does not exist`);
+  }
+  const transformedSaint = DbToGQLTransformSaintData(saint);
+  return transformedSaint;
 }
 
-export function addSaint(saint: SaintInput): Promise<SaintOutPut> {
-  return addOne('saints', saint);
+export async function addSaint(saint: SaintInput): Promise<SaintOutPut> {
+  const dbSaint = GQLToDbTransformSaintData(saint);
+  const addedSaint = await addOne('saints', dbSaint);
+  const gqlSaint = DbToGQLTransformSaintData(addedSaint);
+  return gqlSaint;
 }
 
-export function updateSaint(saint: SaintInput): Promise<SaintOutPut> {
-  return updateOne('saints', saint);
+export async function updateSaint(saint: SaintInput): Promise<SaintOutPut> {
+  const dbSaint = GQLToDbTransformSaintData(saint);
+  const updatedSaint = await updateOne('saints', dbSaint);
+  const gqlSaint = DbToGQLTransformSaintData(updatedSaint);
+  return gqlSaint;
 }
 
 export async function deleteSaint(id: number): Promise<SaintOutPut> {
@@ -62,7 +104,8 @@ export async function deleteSaint(id: number): Promise<SaintOutPut> {
       }`
     );
   }
-  return deletedSaint;
+  const transformedSaint = DbToGQLTransformSaintData(deletedSaint);
+  return transformedSaint;
 }
 
 export async function restoreSaint(id: number): Promise<SaintOutPut> {
@@ -78,5 +121,6 @@ export async function restoreSaint(id: number): Promise<SaintOutPut> {
       }`
     );
   }
-  return restoredSaint;
+  const transformedSaint = DbToGQLTransformSaintData(restoredSaint);
+  return transformedSaint;
 }

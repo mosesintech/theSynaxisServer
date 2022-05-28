@@ -21,12 +21,35 @@ describe('Saints Data Model Functions', () => {
       test('getSaint: success', async () => {
         const id = 1;
         const result = await getSaint(id);
-        expect(result.name).toEqual('Nicholas of Myra');
+        expect(result).toEqual({
+          id: 1,
+          name: 'Nicholas of Myra',
+          life: 'life',
+          born: '270',
+          died: '343',
+          feastMonth: 12,
+          feastDate: 6,
+          isBc: false,
+          isMartyr: false,
+          isConfessor: false,
+          isPatriarch: false,
+          isBishop: true,
+          isPriest: false,
+          isDeacon: false,
+          isMonk: false,
+          isMarried: false,
+          isMale: true,
+          createdAt: expect.any(Date),
+          modifiedAt: expect.any(Date),
+          isDeleted: false,
+        });
       });
 
       test('getSaint failure: ID Does Not Exist', async () => {
         const id = 10;
-        await expect(() => getSaint(id)).rejects.toThrow('Item does not exist');
+        await expect(() => getSaint(id)).rejects.toThrow(
+          'Saint does not exist'
+        );
       });
     });
 
@@ -34,6 +57,9 @@ describe('Saints Data Model Functions', () => {
       test('getSaints: success', async () => {
         const result = await getSaints();
         expect(result.length).toEqual(1);
+        expect(result[0].name).toEqual('Nicholas of Myra');
+        // This ensures all saints have passed through DBtoGQL transform.
+        expect(result[0].isBishop).toEqual(true);
       });
     });
   });
@@ -47,8 +73,8 @@ describe('Saints Data Model Functions', () => {
         life: 'life',
         born: '1924',
         died: '1994',
-        feast_month: '7',
-        feast_date: '12',
+        feastMonth: '7',
+        feastDate: '12',
       };
       const result = await addSaint(saint);
       expect(result.id).toEqual(2);
@@ -56,115 +82,113 @@ describe('Saints Data Model Functions', () => {
       expect(result.life).toEqual('life');
       expect(result.born).toEqual('1924');
       expect(result.died).toEqual('1994');
-      expect(result.feast_month).toEqual(7);
-      expect(result.feast_date).toEqual(12);
+      expect(result.feastMonth).toEqual(7);
+      expect(result.feastDate).toEqual(12);
       // will always be false.
-      expect(result.is_bc).toEqual(false);
-      expect(result.is_martyr).toEqual(false);
-      expect(result.is_patriarch).toEqual(false);
-      expect(result.is_bishop).toEqual(false);
-      expect(result.is_priest).toEqual(false);
-      expect(result.is_deacon).toEqual(false);
-      expect(result.is_monk).toEqual(false);
-      expect(result.is_male).toEqual(false);
-      expect(format(Number(result.created_at), 'MMMM dd, yyyy')).toEqual(
+      expect(result.isBc).toEqual(false);
+      expect(result.isMartyr).toEqual(false);
+      expect(result.isConfessor).toEqual(false);
+      expect(result.isPatriarch).toEqual(false);
+      expect(result.isBishop).toEqual(false);
+      expect(result.isPriest).toEqual(false);
+      expect(result.isDeacon).toEqual(false);
+      expect(result.isMonk).toEqual(false);
+      expect(result.isMale).toEqual(false);
+      expect(format(Number(result.createdAt), 'MMMM dd, yyyy')).toEqual(
         timestamp
       );
-      expect(result.created_at).toEqual(result.modified_at);
-      expect(result.is_deleted).toEqual(false);
+      expect(result.createdAt).toEqual(result.modifiedAt);
+      expect(result.isDeleted).toEqual(false);
     });
-
     describe('addSaint failures', () => {
-      test('addSaint failure: Incorrect Object', async () => {
-        const saint = {
-          name: 'Paisios',
-          life: 'life',
-          born: '1924',
-          died: '1994',
-          feast_month: '7',
-          feast_date: '12',
-          prays_for: 'me',
-        };
-        await expect(() => addSaint(saint)).rejects.toThrow(
-          'Error adding item: error: insert into "saints" ("born", "died", "feast_date", "feast_month", "life", "name", "prays_for") values ($1, $2, $3, $4, $5, $6, $7) returning "id" - column "prays_for" of relation "saints" does not exist'
-        );
-      });
+      // The following test is no longer necessary.
+      // Since the addition of the GQLtoDB transformation function,
+      // it is no longer possible to pass in values to a non-existent column.
+      // test('addSaint failure: Incorrect Object', async () => {
+      //   const saint = {
+      //     name: 'Paisios',
+      //     life: 'life',
+      //     born: '1924',
+      //     died: '1994',
+      //     feastMonth: '7',
+      //     feastDate: '12',
+      //     praysFor: 'me',
+      //   };
+      //   await expect(() => addSaint(saint)).rejects.toThrow(
+      //     'Error adding item: error: insert into "saints" ("born", "died", "feast_date", "feast_month", "life", "name", "praysFor") values ($1, $2, $3, $4, $5, $6, $7) returning "id" - column "prays_for" of relation "saints" does not exist'
+      //   );
+      // });
 
       test('addSaint failure: Missing Name', async () => {
         const saint = {
           life: 'life',
           born: '1924',
           died: '1994',
-          feast_month: '7',
-          feast_date: '12',
+          feastMonth: '7',
+          feastDate: '12',
         };
         await expect(() => addSaint(saint)).rejects.toThrow(
-          'Error adding item: error: insert into "saints" ("born", "died", "feast_date", "feast_month", "life") values ($1, $2, $3, $4, $5) returning "id" - null value in column "name" violates not-null constraint'
+          'Error adding item: error: insert into "saints" ("born", "created_at", "died", "feast_date", "feast_month", "is_bc", "is_bishop", "is_confessor", "is_deacon", "is_deleted", "is_male", "is_married", "is_martyr", "is_monk", "is_patriarch", "is_priest", "life", "modified_at", "name") values ($1, DEFAULT, $2, $3, $4, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, $5, DEFAULT, DEFAULT) returning "id" - null value in column "name" violates not-null constraint'
         );
       });
-
       test('addSaint failure: Missing Life', async () => {
         const saint = {
           name: 'Paisios',
           born: '1924',
           died: '1994',
-          feast_month: '7',
-          feast_date: '12',
+          feastMonth: '7',
+          feastDate: '12',
         };
         await expect(() => addSaint(saint)).rejects.toThrow(
-          'Error adding item: error: insert into "saints" ("born", "died", "feast_date", "feast_month", "name") values ($1, $2, $3, $4, $5) returning "id" - null value in column "life" violates not-null constraint'
+          'Error adding item: error: insert into "saints" ("born", "created_at", "died", "feast_date", "feast_month", "is_bc", "is_bishop", "is_confessor", "is_deacon", "is_deleted", "is_male", "is_married", "is_martyr", "is_monk", "is_patriarch", "is_priest", "life", "modified_at", "name") values ($1, DEFAULT, $2, $3, $4, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, $5) returning "id" - null value in column "life" violates not-null constraint'
         );
       });
-
       test('addSaint failure: Missing Born Date', async () => {
         const saint = {
           name: 'Paisios',
           life: 'life',
           died: '1994',
-          feast_month: '7',
-          feast_date: '12',
+          feastMonth: '7',
+          feastDate: '12',
         };
         await expect(() => addSaint(saint)).rejects.toThrow(
-          'Error adding item: error: insert into "saints" ("died", "feast_date", "feast_month", "life", "name") values ($1, $2, $3, $4, $5) returning "id" - null value in column "born" violates not-null constraint'
+          'Error adding item: error: insert into "saints" ("born", "created_at", "died", "feast_date", "feast_month", "is_bc", "is_bishop", "is_confessor", "is_deacon", "is_deleted", "is_male", "is_married", "is_martyr", "is_monk", "is_patriarch", "is_priest", "life", "modified_at", "name") values (DEFAULT, DEFAULT, $1, $2, $3, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, $4, DEFAULT, $5) returning "id" - null value in column "born" violates not-null constraint'
         );
       });
-
       test('addSaint failure: Missing Died Date', async () => {
         const saint = {
           name: 'Paisios',
           life: 'life',
           born: '1924',
-          feast_month: '7',
-          feast_date: '12',
+          feastMonth: '7',
+          feastDate: '12',
         };
         await expect(() => addSaint(saint)).rejects.toThrow(
-          'Error adding item: error: insert into "saints" ("born", "feast_date", "feast_month", "life", "name") values ($1, $2, $3, $4, $5) returning "id" - null value in column "died" violates not-null constraint'
+          'Error adding item: error: insert into "saints" ("born", "created_at", "died", "feast_date", "feast_month", "is_bc", "is_bishop", "is_confessor", "is_deacon", "is_deleted", "is_male", "is_married", "is_martyr", "is_monk", "is_patriarch", "is_priest", "life", "modified_at", "name") values ($1, DEFAULT, DEFAULT, $2, $3, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, $4, DEFAULT, $5) returning "id" - null value in column "died" violates not-null constraint'
         );
       });
-
       test('addSaint failure: Missing Feast Month', async () => {
         const saint = {
           name: 'Paisios',
           life: 'life',
           born: '1924',
           died: '1994',
-          feast_date: '12',
+          feastDate: '12',
         };
         await expect(() => addSaint(saint)).rejects.toThrow(
-          'Error adding item: error: insert into "saints" ("born", "died", "feast_date", "life", "name") values ($1, $2, $3, $4, $5) returning "id" - null value in column "feast_month" violates not-null constraint'
+          'Error adding item: error: insert into "saints" ("born", "created_at", "died", "feast_date", "feast_month", "is_bc", "is_bishop", "is_confessor", "is_deacon", "is_deleted", "is_male", "is_married", "is_martyr", "is_monk", "is_patriarch", "is_priest", "life", "modified_at", "name") values ($1, DEFAULT, $2, $3, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, $4, DEFAULT, $5) returning "id" - null value in column "feast_month" violates not-null constraint'
         );
       });
-
       test('addSaint failure: Missing Feast Date', async () => {
         const saint = {
           name: 'Paisios',
           life: 'life',
           born: '1924',
           died: '1994',
-          feast_month: '7',
+          feastMonth: '7',
         };
         await expect(() => addSaint(saint)).rejects.toThrow(
-          'Error adding item: error: insert into "saints" ("born", "died", "feast_month", "life", "name") values ($1, $2, $3, $4, $5) returning "id" - null value in column "feast_date" violates not-null constraint'
+          'Error adding item: error: insert into "saints" ("born", "created_at", "died", "feast_date", "feast_month", "is_bc", "is_bishop", "is_confessor", "is_deacon", "is_deleted", "is_male", "is_married", "is_martyr", "is_monk", "is_patriarch", "is_priest", "life", "modified_at", "name") values ($1, DEFAULT, $2, DEFAULT, $3, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, $4, DEFAULT, $5) returning "id" - null value in column "feast_date" violates not-null constraint'
         );
       });
     });
@@ -174,8 +198,8 @@ describe('Saints Data Model Functions', () => {
     test('updateSaint: success', async () => {
       const updatedSaint = {
         id: 2,
-        is_monk: true,
-        is_male: true,
+        isMonk: true,
+        isMale: true,
       };
       const result = await updateSaint(updatedSaint);
       expect(result.id).toEqual(2);
@@ -183,30 +207,35 @@ describe('Saints Data Model Functions', () => {
       expect(result.life).toEqual('life');
       expect(result.born).toEqual('1924');
       expect(result.died).toEqual('1994');
-      expect(result.feast_month).toEqual(7);
-      expect(result.feast_date).toEqual(12);
-      expect(result.is_bc).toEqual(false);
-      expect(result.is_martyr).toEqual(false);
-      expect(result.is_patriarch).toEqual(false);
-      expect(result.is_bishop).toEqual(false);
-      expect(result.is_priest).toEqual(false);
-      expect(result.is_deacon).toEqual(false);
-      expect(result.is_monk).toEqual(true);
-      expect(result.is_male).toEqual(true);
-      expect(result.created_at).not.toEqual(result.modified_at);
-      expect(result.is_deleted).toEqual(false);
+      expect(result.feastMonth).toEqual(7);
+      expect(result.feastDate).toEqual(12);
+      expect(result.isBc).toEqual(false);
+      expect(result.isMartyr).toEqual(false);
+      expect(result.isConfessor).toEqual(false);
+      expect(result.isPatriarch).toEqual(false);
+      expect(result.isBishop).toEqual(false);
+      expect(result.isPriest).toEqual(false);
+      expect(result.isDeacon).toEqual(false);
+      expect(result.isMonk).toEqual(true);
+      expect(result.isMale).toEqual(true);
+      expect(result.createdAt).not.toEqual(result.modifiedAt);
+      expect(result.isDeleted).toEqual(false);
     });
 
     describe('updateSaint failures', () => {
-      test('updateSaint failure: Incorrect Object', async () => {
-        const saint = {
-          id: 2,
-          prays_for: 'me',
-        };
-        await expect(() => updateSaint(saint)).rejects.toThrow(
-          'Error updating item: error: update "saints" set "id" = $1, "prays_for" = $2, "modified_at" = CURRENT_TIMESTAMP where "id" = $3 - column "prays_for" of relation "saints" does not exist'
-        );
-      });
+      // The following test is no longer necessary.
+      // Since the addition of the GQLtoDB transformation function,
+      // it is no longer possible to pass in values to a non-existent column.
+
+      // test('updateSaint failure: Incorrect Object', async () => {
+      //   const saint = {
+      //     id: 2,
+      //     praysFor: 'me',
+      //   };
+      //   await expect(() => updateSaint(saint)).rejects.toThrow(
+      //     'Error updating item: error: update "saints" set "id" = $1, "prays_for" = $2, "modified_at" = CURRENT_TIMESTAMP where "id" = $3 - column "prays_for" of relation "saints" does not exist'
+      //   );
+      // });
 
       test('updateSaint failure: Missing ID', async () => {
         const saint = {
@@ -224,8 +253,8 @@ describe('Saints Data Model Functions', () => {
       const id = 2;
       const result = await deleteSaint(id);
       expect(result.id).toEqual(2);
-      expect(result.created_at).not.toEqual(result.modified_at);
-      expect(result.is_deleted).toEqual(true);
+      expect(result.createdAt).not.toEqual(result.modifiedAt);
+      expect(result.isDeleted).toEqual(true);
     });
 
     describe('deleteSaint: failures', () => {
@@ -250,8 +279,8 @@ describe('Saints Data Model Functions', () => {
       const id = 2;
       const result = await restoreSaint(id);
       expect(result.id).toEqual(2);
-      expect(result.created_at).not.toEqual(result.modified_at);
-      expect(result.is_deleted).toEqual(false);
+      expect(result.createdAt).not.toEqual(result.modifiedAt);
+      expect(result.isDeleted).toEqual(false);
     });
 
     describe('restoreSaint: failures', () => {

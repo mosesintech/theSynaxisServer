@@ -12,6 +12,7 @@ export async function seed(knex: Knex): Promise<void> {
       feast_month: 12,
       feast_date: 6,
       is_martyr: false,
+      is_confessor: false,
       is_patriarch: false,
       is_bishop: true,
       is_priest: false,

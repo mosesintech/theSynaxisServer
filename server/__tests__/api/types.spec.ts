@@ -10,10 +10,11 @@ describe('GraphQL Types', () => {
     expect(fields.life.type).toEqual(GraphQLString);
     expect(fields.born.type).toEqual(GraphQLString);
     expect(fields.died.type).toEqual(GraphQLString);
-    expect(fields.isBC.type).toEqual(GraphQLBoolean);
+    expect(fields.isBc.type).toEqual(GraphQLBoolean);
     expect(fields.feastMonth.type).toEqual(GraphQLInt);
     expect(fields.feastDate.type).toEqual(GraphQLInt);
     expect(fields.isMartyr.type).toEqual(GraphQLBoolean);
+    expect(fields.isConfessor.type).toEqual(GraphQLBoolean);
     expect(fields.isPatriarch.type).toEqual(GraphQLBoolean);
     expect(fields.isBishop.type).toEqual(GraphQLBoolean);
     expect(fields.isPriest.type).toEqual(GraphQLBoolean);
