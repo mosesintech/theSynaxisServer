@@ -38,7 +38,7 @@ const staging: Knex.Config = {
   client: 'pg',
   connection: {
     connectionString: process.env.DATABASE_URL,
-    ssl: true,
+    ssl: { rejectUnauthorized: true },
   },
   pool: {
     min: 2,
