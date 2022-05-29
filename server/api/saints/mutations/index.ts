@@ -1,5 +1,4 @@
 import addSaintMutation from './addSaint';
+import updateSaintMutation from './updateSaint';
 
-const testing = true;
-
-export { addSaintMutation, testing };
+export { addSaintMutation, updateSaintMutation };
