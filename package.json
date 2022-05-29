@@ -8,10 +8,11 @@
   },
   "scripts": {
     "build": "rimraf dist && tsc",
-    "predev": "npm run build",
+    "dev:knex": "cross-env NODE_ENV=development knex migrate:latest",
+    "predev": "npm run build && npm run dev:knex",
     "dev": "cross-env NODE_ENV=development concurrently 'tsc --watch' 'nodemon dist/index.js'",
     "prestart": "npm run build",
-    "start": "node dist/index.js",
+    "start": "node dist/index.js NODE_ENV",
     "test": "cross-env NODE_ENV=test jest --runInBand",
     "test:cov": "cross-env NODE_ENV=test jest --runInBand --coverage",
     "commit": "cz",
