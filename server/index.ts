@@ -18,17 +18,20 @@ const serverOnMessage = (
 };
 
 app.use(cors());
-app.use(helmet());
-app.use(bodyParserGraphQL());
-app.get('/', serverOnMessage);
-
 app.use(
   '/graphql',
   graphqlHTTP(() => ({
     schema,
-    graphiql: false,
+    graphiql:
+      process.env.NODE_ENV ===
+      /* istanbul ignore next */ ('development' || 'staging'),
   }))
 );
+
+// helmet must be used after graphqlHTTP or else graphiql will not load
+app.use(helmet());
+app.use(bodyParserGraphQL());
+app.get('/', serverOnMessage);
 
 export const port = process.env.PORT;
 
