@@ -1,6 +1,8 @@
 import {
   addSaintMutation,
   updateSaintMutation,
+  deleteSaintMutation,
+  restoreSaintMutation,
 } from '../../../api/saints/mutations';
 import knex from '../../../data/dbConfig';
 
@@ -100,6 +102,30 @@ describe('Saint Mutations', () => {
     expect(result.name).toEqual('Nicholas of Myra');
     expect(result.isBishop).toEqual(true);
     expect(result.life).toEqual(saint.life);
+  });
+
+  test('deleteSaint Mutation', async () => {
+    const args = {
+      id: 1,
+    };
+    const result = await deleteSaintMutation.resolve(null, args);
+    expect(deleteSaintMutation.name).toEqual('deleteSaint Mutation');
+    expect(deleteSaintMutation.type.toString()).toEqual('SaintType');
+    expect(deleteSaintMutation.args.id.type.toString()).toEqual('ID!');
+    expect(result.id).toEqual(1);
+    expect(result.isDeleted).toEqual(true);
+  });
+
+  test('restoreSaint Mutation', async () => {
+    const args = {
+      id: 1,
+    };
+    const result = await restoreSaintMutation.resolve(null, args);
+    expect(restoreSaintMutation.name).toEqual('restoreSaint Mutation');
+    expect(restoreSaintMutation.type.toString()).toEqual('SaintType');
+    expect(restoreSaintMutation.args.id.type.toString()).toEqual('ID!');
+    expect(result.id).toEqual(1);
+    expect(result.isDeleted).toEqual(false);
   });
 
   afterAll(async () => {
