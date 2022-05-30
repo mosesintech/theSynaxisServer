@@ -45,6 +45,7 @@ const staging: Knex.Config = {
     max: 10,
   },
   migrations: {
+    directory: `${__dirname}/server/data/migrations`,
     tableName: 'knex_migrations',
   },
 };

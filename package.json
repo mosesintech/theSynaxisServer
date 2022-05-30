@@ -9,6 +9,7 @@
   "scripts": {
     "build": "rimraf dist && tsc",
     "dev:knex": "cross-env NODE_ENV=development knex migrate:latest",
+    "staging:knex": "cross-env NODE_ENV=staging knex migrate:latest",
     "predev": "npm run build && npm run dev:knex",
     "dev": "cross-env NODE_ENV=development concurrently 'tsc --watch' 'nodemon dist/index.js'",
     "prestart": "npm run build",
