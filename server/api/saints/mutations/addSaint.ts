@@ -15,6 +15,8 @@ type Args = {
   feastMonth: number;
   feastDate: number;
   isBc?: boolean;
+  isApostle?: boolean;
+  isLXX?: boolean;
   isMartyr?: boolean;
   isConfessor?: boolean;
   isPatriarch?: boolean;
@@ -37,6 +39,8 @@ const addSaintMutation = {
     feastMonth: { type: new GraphQLNonNull(GraphQLInt) },
     feastDate: { type: new GraphQLNonNull(GraphQLInt) },
     isBc: { type: GraphQLBoolean },
+    isApostle: { type: GraphQLBoolean },
+    isLXX: { type: GraphQLBoolean },
     isMartyr: { type: GraphQLBoolean },
     isConfessor: { type: GraphQLBoolean },
     isPatriarch: { type: GraphQLBoolean },

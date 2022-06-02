@@ -30,6 +30,8 @@ describe('Saints Data Model Functions', () => {
           feastMonth: 12,
           feastDate: 6,
           isBc: false,
+          isApostle: false,
+          isLXX: false,
           isMartyr: false,
           isConfessor: false,
           isPatriarch: false,
@@ -86,6 +88,8 @@ describe('Saints Data Model Functions', () => {
       expect(result.feastDate).toEqual(12);
       // will always be false.
       expect(result.isBc).toEqual(false);
+      expect(result.isApostle).toEqual(false);
+      expect(result.isLXX).toEqual(false);
       expect(result.isMartyr).toEqual(false);
       expect(result.isConfessor).toEqual(false);
       expect(result.isPatriarch).toEqual(false);
@@ -104,6 +108,7 @@ describe('Saints Data Model Functions', () => {
       // The following test is no longer necessary.
       // Since the addition of the GQLtoDB transformation function,
       // it is no longer possible to pass in values to a non-existent column.
+
       // test('addSaint failure: Incorrect Object', async () => {
       //   const saint = {
       //     name: 'Paisios',
@@ -128,7 +133,7 @@ describe('Saints Data Model Functions', () => {
           feastDate: '12',
         };
         await expect(() => addSaint(saint)).rejects.toThrow(
-          'Error adding item: error: insert into "saints" ("born", "created_at", "died", "feast_date", "feast_month", "is_bc", "is_bishop", "is_confessor", "is_deacon", "is_deleted", "is_male", "is_married", "is_martyr", "is_monk", "is_patriarch", "is_priest", "life", "modified_at", "name") values ($1, DEFAULT, $2, $3, $4, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, $5, DEFAULT, DEFAULT) returning "id" - null value in column "name" violates not-null constraint'
+          'Error adding item: error: insert into "saints" ("born", "created_at", "died", "feast_date", "feast_month", "is_apostle", "is_bc", "is_bishop", "is_confessor", "is_deacon", "is_deleted", "is_lxx", "is_male", "is_married", "is_martyr", "is_monk", "is_patriarch", "is_priest", "life", "modified_at", "name") values ($1, DEFAULT, $2, $3, $4, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, $5, DEFAULT, DEFAULT) returning "id" - null value in column "name" violates not-null constraint'
         );
       });
       test('addSaint failure: Missing Life', async () => {
@@ -140,7 +145,7 @@ describe('Saints Data Model Functions', () => {
           feastDate: '12',
         };
         await expect(() => addSaint(saint)).rejects.toThrow(
-          'Error adding item: error: insert into "saints" ("born", "created_at", "died", "feast_date", "feast_month", "is_bc", "is_bishop", "is_confessor", "is_deacon", "is_deleted", "is_male", "is_married", "is_martyr", "is_monk", "is_patriarch", "is_priest", "life", "modified_at", "name") values ($1, DEFAULT, $2, $3, $4, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, $5) returning "id" - null value in column "life" violates not-null constraint'
+          'Error adding item: error: insert into "saints" ("born", "created_at", "died", "feast_date", "feast_month", "is_apostle", "is_bc", "is_bishop", "is_confessor", "is_deacon", "is_deleted", "is_lxx", "is_male", "is_married", "is_martyr", "is_monk", "is_patriarch", "is_priest", "life", "modified_at", "name") values ($1, DEFAULT, $2, $3, $4, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, $5) returning "id" - null value in column "life" violates not-null constraint'
         );
       });
       test('addSaint failure: Missing Born Date', async () => {
@@ -152,7 +157,7 @@ describe('Saints Data Model Functions', () => {
           feastDate: '12',
         };
         await expect(() => addSaint(saint)).rejects.toThrow(
-          'Error adding item: error: insert into "saints" ("born", "created_at", "died", "feast_date", "feast_month", "is_bc", "is_bishop", "is_confessor", "is_deacon", "is_deleted", "is_male", "is_married", "is_martyr", "is_monk", "is_patriarch", "is_priest", "life", "modified_at", "name") values (DEFAULT, DEFAULT, $1, $2, $3, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, $4, DEFAULT, $5) returning "id" - null value in column "born" violates not-null constraint'
+          'Error adding item: error: insert into "saints" ("born", "created_at", "died", "feast_date", "feast_month", "is_apostle", "is_bc", "is_bishop", "is_confessor", "is_deacon", "is_deleted", "is_lxx", "is_male", "is_married", "is_martyr", "is_monk", "is_patriarch", "is_priest", "life", "modified_at", "name") values (DEFAULT, DEFAULT, $1, $2, $3, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, $4, DEFAULT, $5) returning "id" - null value in column "born" violates not-null constraint'
         );
       });
       test('addSaint failure: Missing Died Date', async () => {
@@ -164,7 +169,7 @@ describe('Saints Data Model Functions', () => {
           feastDate: '12',
         };
         await expect(() => addSaint(saint)).rejects.toThrow(
-          'Error adding item: error: insert into "saints" ("born", "created_at", "died", "feast_date", "feast_month", "is_bc", "is_bishop", "is_confessor", "is_deacon", "is_deleted", "is_male", "is_married", "is_martyr", "is_monk", "is_patriarch", "is_priest", "life", "modified_at", "name") values ($1, DEFAULT, DEFAULT, $2, $3, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, $4, DEFAULT, $5) returning "id" - null value in column "died" violates not-null constraint'
+          'Error adding item: error: insert into "saints" ("born", "created_at", "died", "feast_date", "feast_month", "is_apostle", "is_bc", "is_bishop", "is_confessor", "is_deacon", "is_deleted", "is_lxx", "is_male", "is_married", "is_martyr", "is_monk", "is_patriarch", "is_priest", "life", "modified_at", "name") values ($1, DEFAULT, DEFAULT, $2, $3, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, $4, DEFAULT, $5) returning "id" - null value in column "died" violates not-null constraint'
         );
       });
       test('addSaint failure: Missing Feast Month', async () => {
@@ -176,7 +181,7 @@ describe('Saints Data Model Functions', () => {
           feastDate: '12',
         };
         await expect(() => addSaint(saint)).rejects.toThrow(
-          'Error adding item: error: insert into "saints" ("born", "created_at", "died", "feast_date", "feast_month", "is_bc", "is_bishop", "is_confessor", "is_deacon", "is_deleted", "is_male", "is_married", "is_martyr", "is_monk", "is_patriarch", "is_priest", "life", "modified_at", "name") values ($1, DEFAULT, $2, $3, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, $4, DEFAULT, $5) returning "id" - null value in column "feast_month" violates not-null constraint'
+          'Error adding item: error: insert into "saints" ("born", "created_at", "died", "feast_date", "feast_month", "is_apostle", "is_bc", "is_bishop", "is_confessor", "is_deacon", "is_deleted", "is_lxx", "is_male", "is_married", "is_martyr", "is_monk", "is_patriarch", "is_priest", "life", "modified_at", "name") values ($1, DEFAULT, $2, $3, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, $4, DEFAULT, $5) returning "id" - null value in column "feast_month" violates not-null constraint'
         );
       });
       test('addSaint failure: Missing Feast Date', async () => {
@@ -188,7 +193,7 @@ describe('Saints Data Model Functions', () => {
           feastMonth: '7',
         };
         await expect(() => addSaint(saint)).rejects.toThrow(
-          'Error adding item: error: insert into "saints" ("born", "created_at", "died", "feast_date", "feast_month", "is_bc", "is_bishop", "is_confessor", "is_deacon", "is_deleted", "is_male", "is_married", "is_martyr", "is_monk", "is_patriarch", "is_priest", "life", "modified_at", "name") values ($1, DEFAULT, $2, DEFAULT, $3, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, $4, DEFAULT, $5) returning "id" - null value in column "feast_date" violates not-null constraint'
+          'Error adding item: error: insert into "saints" ("born", "created_at", "died", "feast_date", "feast_month", "is_apostle", "is_bc", "is_bishop", "is_confessor", "is_deacon", "is_deleted", "is_lxx", "is_male", "is_married", "is_martyr", "is_monk", "is_patriarch", "is_priest", "life", "modified_at", "name") values ($1, DEFAULT, $2, DEFAULT, $3, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, $4, DEFAULT, $5) returning "id" - null value in column "feast_date" violates not-null constraint'
         );
       });
     });
@@ -210,6 +215,8 @@ describe('Saints Data Model Functions', () => {
       expect(result.feastMonth).toEqual(7);
       expect(result.feastDate).toEqual(12);
       expect(result.isBc).toEqual(false);
+      expect(result.isApostle).toEqual(false);
+      expect(result.isLXX).toEqual(false);
       expect(result.isMartyr).toEqual(false);
       expect(result.isConfessor).toEqual(false);
       expect(result.isPatriarch).toEqual(false);

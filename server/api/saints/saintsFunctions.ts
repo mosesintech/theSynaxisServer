@@ -9,6 +9,8 @@ interface DBSaint extends Saint {
   feast_month?: string;
   feast_date?: string;
   is_bc?: boolean;
+  is_apostle?: boolean;
+  is_lxx?: boolean;
   is_martyr?: boolean;
   is_confessor?: boolean;
   is_patriarch?: boolean;
@@ -32,6 +34,8 @@ interface GQLSaint extends Saint {
   feastMonth?: string;
   feastDate?: string;
   isBc?: boolean;
+  isApostle?: boolean;
+  isLXX?: boolean;
   isMartyr?: boolean;
   isConfessor?: boolean;
   isPatriarch?: boolean;
@@ -58,6 +62,8 @@ export function DbToGQLTransformSaintData(saint: DBSaint): GQLSaint {
       feastMonth: saint.feast_month,
       feastDate: saint.feast_date,
       isBc: saint.is_bc,
+      isApostle: saint.is_apostle,
+      isLXX: saint.is_lxx,
       isMartyr: saint.is_martyr,
       isConfessor: saint.is_confessor,
       isPatriarch: saint.is_patriarch,
@@ -82,6 +88,8 @@ export function DbToGQLTransformSaintData(saint: DBSaint): GQLSaint {
     feastMonth: saint.feast_month,
     feastDate: saint.feast_date,
     isBc: saint.is_bc,
+    isApostle: saint.is_apostle,
+    isLXX: saint.is_lxx,
     isMartyr: saint.is_martyr,
     isConfessor: saint.is_confessor,
     isPatriarch: saint.is_patriarch,
@@ -110,6 +118,8 @@ export function GQLToDbTransformSaintData(saint: GQLSaint): DBSaint {
       feast_month: saint.feastMonth,
       feast_date: saint.feastDate,
       is_bc: saint.isBc,
+      is_apostle: saint.isApostle,
+      is_lxx: saint.isLXX,
       is_martyr: saint.isMartyr,
       is_confessor: saint.isConfessor,
       is_patriarch: saint.isPatriarch,
@@ -133,6 +143,8 @@ export function GQLToDbTransformSaintData(saint: GQLSaint): DBSaint {
     feast_month: saint.feastMonth,
     feast_date: saint.feastDate,
     is_bc: saint.isBc,
+    is_apostle: saint.isApostle,
+    is_lxx: saint.isLXX,
     is_martyr: saint.isMartyr,
     is_confessor: saint.isConfessor,
     is_patriarch: saint.isPatriarch,

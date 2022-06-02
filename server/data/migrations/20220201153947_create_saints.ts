@@ -11,6 +11,8 @@ export async function up(knex: Knex): Promise<any> {
     saints.boolean('is_bc').notNullable().defaultTo(false);
     saints.integer('feast_month').notNullable();
     saints.integer('feast_date').notNullable();
+    saints.boolean('is_apostle').notNullable().defaultTo(false);
+    saints.boolean('is_lxx').notNullable().defaultTo(false);
     saints.boolean('is_martyr').notNullable().defaultTo(false);
     saints.boolean('is_confessor').notNullable().defaultTo(false);
     saints.boolean('is_patriarch').notNullable().defaultTo(false);

@@ -14,6 +14,8 @@ describe('Saint Business Logic Helper Functions', () => {
         feast_month: '7',
         feast_date: '12',
         is_bc: false,
+        is_apostle: false,
+        is_lxx: false,
         is_martyr: false,
         is_confessor: false,
         is_patriarch: false,
@@ -36,6 +38,8 @@ describe('Saint Business Logic Helper Functions', () => {
       expect(result.feastMonth).toEqual(saint.feast_month);
       expect(result.feastDate).toEqual(saint.feast_date);
       expect(result.isBc).toEqual(saint.is_bc);
+      expect(result.isApostle).toEqual(saint.is_apostle);
+      expect(result.isLXX).toEqual(saint.is_lxx);
       expect(result.isMartyr).toEqual(saint.is_martyr);
       expect(result.isConfessor).toEqual(saint.is_confessor);
       expect(result.isPatriarch).toEqual(saint.is_patriarch);
@@ -60,6 +64,8 @@ describe('Saint Business Logic Helper Functions', () => {
         feast_month: '7',
         feast_date: '12',
         is_bc: false,
+        is_apostle: false,
+        is_lxx: false,
         is_martyr: false,
         is_confessor: false,
         is_patriarch: false,
@@ -83,6 +89,8 @@ describe('Saint Business Logic Helper Functions', () => {
       expect(result.feastMonth).toEqual(saint.feast_month);
       expect(result.feastDate).toEqual(saint.feast_date);
       expect(result.isBc).toEqual(saint.is_bc);
+      expect(result.isApostle).toEqual(saint.is_apostle);
+      expect(result.isLXX).toEqual(saint.is_lxx);
       expect(result.isMartyr).toEqual(saint.is_martyr);
       expect(result.isConfessor).toEqual(saint.is_confessor);
       expect(result.isPatriarch).toEqual(saint.is_patriarch);
@@ -108,6 +116,8 @@ describe('Saint Business Logic Helper Functions', () => {
         feast_month: '7',
         feast_date: '12',
         is_bc: false,
+        is_apostle: false,
+        is_lxx: false,
         is_martyr: false,
         is_confessor: false,
         is_patriarch: false,
@@ -130,6 +140,8 @@ describe('Saint Business Logic Helper Functions', () => {
       expect(result.feastMonth).toEqual(saint.feast_month);
       expect(result.feastDate).toEqual(saint.feast_date);
       expect(result.isBc).toEqual(saint.is_bc);
+      expect(result.isApostle).toEqual(saint.is_apostle);
+      expect(result.isLXX).toEqual(saint.is_lxx);
       expect(result.isMartyr).toEqual(saint.is_martyr);
       expect(result.isConfessor).toEqual(saint.is_confessor);
       expect(result.isPatriarch).toEqual(saint.is_patriarch);
@@ -154,6 +166,8 @@ describe('Saint Business Logic Helper Functions', () => {
         feastMonth: '7',
         feastDate: '12',
         isBc: false,
+        isApostle: false,
+        isLXX: false,
         isMartyr: false,
         isConfessor: false,
         isPatriarch: false,
@@ -177,6 +191,8 @@ describe('Saint Business Logic Helper Functions', () => {
       expect(result.feast_month).toEqual(saint.feastMonth);
       expect(result.feast_date).toEqual(saint.feastDate);
       expect(result.is_bc).toEqual(saint.isBc);
+      expect(result.is_apostle).toEqual(saint.isApostle);
+      expect(result.is_lxx).toEqual(saint.isLXX);
       expect(result.is_martyr).toEqual(saint.isMartyr);
       expect(result.is_confessor).toEqual(saint.isConfessor);
       expect(result.is_patriarch).toEqual(saint.isPatriarch);

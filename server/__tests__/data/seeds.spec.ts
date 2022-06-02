@@ -20,6 +20,8 @@ describe('Seed Tests', () => {
       expect(result[0].is_bc).toEqual(false);
       expect(result[0].feast_date).toEqual(6);
       expect(result[0].feast_month).toEqual(12);
+      expect(result[0].is_apostle).toEqual(false);
+      expect(result[0].is_lxx).toEqual(false);
       expect(result[0].is_martyr).toEqual(false);
       expect(result[0].is_confessor).toEqual(false);
       expect(result[0].is_patriarch).toEqual(false);

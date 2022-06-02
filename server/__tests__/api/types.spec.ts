@@ -13,6 +13,8 @@ describe('GraphQL Types', () => {
     expect(fields.isBc.type).toEqual(GraphQLBoolean);
     expect(fields.feastMonth.type).toEqual(GraphQLInt);
     expect(fields.feastDate.type).toEqual(GraphQLInt);
+    expect(fields.isApostle.type).toEqual(GraphQLBoolean);
+    expect(fields.isLXX.type).toEqual(GraphQLBoolean);
     expect(fields.isMartyr.type).toEqual(GraphQLBoolean);
     expect(fields.isConfessor.type).toEqual(GraphQLBoolean);
     expect(fields.isPatriarch.type).toEqual(GraphQLBoolean);

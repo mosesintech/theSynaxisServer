@@ -21,6 +21,8 @@ describe('Saint Mutations', () => {
       feastDate: 6,
       feastMonth: 12,
       isBc: false,
+      isApostle: false,
+      isLXX: false,
       isMartyr: false,
       isConfessor: false,
       isPatriarch: false,
@@ -41,6 +43,8 @@ describe('Saint Mutations', () => {
     expect(addSaintMutation.args.feastDate.type.toString()).toEqual('Int!');
     expect(addSaintMutation.args.feastMonth.type.toString()).toEqual('Int!');
     expect(addSaintMutation.args.isBc.type.toString()).toEqual('Boolean');
+    expect(addSaintMutation.args.isApostle.type.toString()).toEqual('Boolean');
+    expect(addSaintMutation.args.isLXX.type.toString()).toEqual('Boolean');
     expect(addSaintMutation.args.isMartyr.type.toString()).toEqual('Boolean');
     expect(addSaintMutation.args.isConfessor.type.toString()).toEqual(
       'Boolean'
@@ -75,6 +79,10 @@ describe('Saint Mutations', () => {
     expect(updateSaintMutation.args.feastDate.type.toString()).toEqual('Int');
     expect(updateSaintMutation.args.feastMonth.type.toString()).toEqual('Int');
     expect(updateSaintMutation.args.isBc.type.toString()).toEqual('Boolean');
+    expect(updateSaintMutation.args.isApostle.type.toString()).toEqual(
+      'Boolean'
+    );
+    expect(updateSaintMutation.args.isLXX.type.toString()).toEqual('Boolean');
     expect(updateSaintMutation.args.isMartyr.type.toString()).toEqual(
       'Boolean'
     );

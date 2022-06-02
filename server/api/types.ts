@@ -15,6 +15,8 @@ const SaintType = new GraphQLObjectType({
     born: { type: GraphQLString },
     died: { type: GraphQLString },
     isBc: { type: GraphQLBoolean },
+    isApostle: { type: GraphQLBoolean },
+    isLXX: { type: GraphQLBoolean },
     feastMonth: { type: GraphQLInt },
     feastDate: { type: GraphQLInt },
     isMartyr: { type: GraphQLBoolean },
