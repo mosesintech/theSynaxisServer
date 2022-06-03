@@ -58,8 +58,9 @@ describe('Saints Data Model Functions', () => {
     describe('getSaints', () => {
       test('getSaints: success', async () => {
         const result = await getSaints();
-        expect(result.length).toEqual(1);
+        expect(result.length).toEqual(2);
         expect(result[0].name).toEqual('Nicholas of Myra');
+        expect(result[1].name).toEqual('Joseph the Hesychast');
         // This ensures all saints have passed through DBtoGQL transform.
         expect(result[0].isBishop).toEqual(true);
       });
@@ -79,7 +80,7 @@ describe('Saints Data Model Functions', () => {
         feastDate: '12',
       };
       const result = await addSaint(saint);
-      expect(result.id).toEqual(2);
+      expect(result.id).toEqual(3);
       expect(result.name).toEqual('Paisios');
       expect(result.life).toEqual('life');
       expect(result.born).toEqual('1924');
@@ -202,12 +203,12 @@ describe('Saints Data Model Functions', () => {
   describe('Update Saints', () => {
     test('updateSaint: success', async () => {
       const updatedSaint = {
-        id: 2,
+        id: 3,
         isMonk: true,
         isMale: true,
       };
       const result = await updateSaint(updatedSaint);
-      expect(result.id).toEqual(2);
+      expect(result.id).toEqual(3);
       expect(result.name).toEqual('Paisios');
       expect(result.life).toEqual('life');
       expect(result.born).toEqual('1924');

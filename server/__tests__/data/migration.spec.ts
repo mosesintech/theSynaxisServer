@@ -6,11 +6,14 @@ describe('Migration Tests', () => {
     await knex.migrate.latest();
   });
 
-  describe('Saints Migration', () => {
-    test('should run saints migration', async () => {
-      const result = await knex('saints');
-      expect(result.length).toBe(0);
-    });
+  test('should run saints migration', async () => {
+    const result = await knex('saints');
+    expect(result.length).toBe(0);
+  });
+
+  test('should run works migration', async () => {
+    const result = await knex('works');
+    expect(result.length).toBe(0);
   });
 
   afterAll(async () => {

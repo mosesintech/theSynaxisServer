@@ -19,7 +19,7 @@ describe('Data Access Functions', () => {
     describe('findAll function', () => {
       test('findAll success', async () => {
         const result = await findAll('saints');
-        expect(result.length).toEqual(1);
+        expect(result.length).toEqual(2);
       });
 
       test('findAll failure: Database Does Not Exist', async () => {

@@ -8,34 +8,46 @@ describe('Seed Tests', () => {
     await knex.seed.run();
   });
 
-  describe('Saints Seed', () => {
-    test('should run saints seed', async () => {
-      const timestamp = format(new Date(), 'MMMM dd, yyyy');
-      const result = await knex('saints');
+  test('should run saints seed', async () => {
+    const timestamp = format(new Date(), 'MMMM dd, yyyy');
+    const result = await knex('saints');
 
-      expect(result.length).toEqual(1);
-      expect(result[0].name).toEqual('Nicholas of Myra');
-      expect(result[0].born).toEqual('270');
-      expect(result[0].died).toEqual('343');
-      expect(result[0].is_bc).toEqual(false);
-      expect(result[0].feast_date).toEqual(6);
-      expect(result[0].feast_month).toEqual(12);
-      expect(result[0].is_apostle).toEqual(false);
-      expect(result[0].is_lxx).toEqual(false);
-      expect(result[0].is_martyr).toEqual(false);
-      expect(result[0].is_confessor).toEqual(false);
-      expect(result[0].is_patriarch).toEqual(false);
-      expect(result[0].is_bishop).toEqual(true);
-      expect(result[0].is_priest).toEqual(false);
-      expect(result[0].is_deacon).toEqual(false);
-      expect(result[0].is_monk).toEqual(false);
-      expect(result[0].is_married).toEqual(false);
-      expect(result[0].is_male).toEqual(true);
-      expect(result[0].life).toEqual('life');
-      expect(format(result[0].created_at, 'MMMM dd, yyyy')).toEqual(timestamp);
-      expect(result[0].modified_at).toEqual(result[0].created_at);
-      expect(result[0].is_deleted).toEqual(false);
-    });
+    expect(result.length).toEqual(2);
+    expect(result[0].name).toEqual('Nicholas of Myra');
+    expect(result[1].name).toEqual('Joseph the Hesychast');
+    expect(result[0].born).toEqual('270');
+    expect(result[0].died).toEqual('343');
+    expect(result[0].is_bc).toEqual(false);
+    expect(result[0].feast_date).toEqual(6);
+    expect(result[0].feast_month).toEqual(12);
+    expect(result[0].is_apostle).toEqual(false);
+    expect(result[0].is_lxx).toEqual(false);
+    expect(result[0].is_martyr).toEqual(false);
+    expect(result[0].is_confessor).toEqual(false);
+    expect(result[0].is_patriarch).toEqual(false);
+    expect(result[0].is_bishop).toEqual(true);
+    expect(result[0].is_priest).toEqual(false);
+    expect(result[0].is_deacon).toEqual(false);
+    expect(result[0].is_monk).toEqual(false);
+    expect(result[0].is_married).toEqual(false);
+    expect(result[0].is_male).toEqual(true);
+    expect(result[0].life).toEqual('life');
+    expect(format(result[0].created_at, 'MMMM dd, yyyy')).toEqual(timestamp);
+    expect(result[0].modified_at).toEqual(result[0].created_at);
+    expect(result[0].is_deleted).toEqual(false);
+  });
+
+  test('should run works seed', async () => {
+    const timestamp = format(new Date(), 'MMMM dd, yyyy');
+    const result = await knex('works');
+
+    expect(result.length).toEqual(1);
+    expect(result[0].title).toEqual('Monastic Wisdom');
+    expect(result[0].published_date).toEqual('October 1999');
+    expect(result[0].saint_id).toEqual(2);
+    expect(format(result[0].created_at, 'MMMM dd, yyyy')).toEqual(timestamp);
+    expect(result[0].modified_at).toEqual(result[0].created_at);
+    expect(result[0].is_deleted).toEqual(false);
   });
 
   afterAll(async () => {
