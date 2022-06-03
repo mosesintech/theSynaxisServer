@@ -33,7 +33,7 @@ interface SaintInput extends Saint {
   is_male?: boolean;
 }
 
-interface SaintOutPut extends Saint {
+interface SaintOutput extends Saint {
   id?: number;
   name?: string;
   life?: string;
@@ -65,7 +65,7 @@ export async function getSaints() {
   return transformedSaints;
 }
 
-export async function getSaint(id: number): Promise<SaintOutPut> {
+export async function getSaint(id: number): Promise<SaintOutput> {
   let saint = {};
   try {
     saint = await findOne('saints', id);
@@ -77,21 +77,21 @@ export async function getSaint(id: number): Promise<SaintOutPut> {
   return transformedSaint;
 }
 
-export async function addSaint(saint: SaintInput): Promise<SaintOutPut> {
+export async function addSaint(saint: SaintInput): Promise<SaintOutput> {
   const dbSaint = GQLToDbTransformSaintData(saint);
   const addedSaint = await addOne('saints', dbSaint);
   const gqlSaint = DbToGQLTransformSaintData(addedSaint);
   return gqlSaint;
 }
 
-export async function updateSaint(saint: SaintInput): Promise<SaintOutPut> {
+export async function updateSaint(saint: SaintInput): Promise<SaintOutput> {
   const dbSaint = GQLToDbTransformSaintData(saint);
   const updatedSaint = await updateOne('saints', dbSaint);
   const gqlSaint = DbToGQLTransformSaintData(updatedSaint);
   return gqlSaint;
 }
 
-export async function deleteSaint(id: number): Promise<SaintOutPut> {
+export async function deleteSaint(id: number): Promise<SaintOutput> {
   let deletedSaint = {};
   try {
     deletedSaint = await deleteOne('saints', id);
@@ -108,7 +108,7 @@ export async function deleteSaint(id: number): Promise<SaintOutPut> {
   return transformedSaint;
 }
 
-export async function restoreSaint(id: number): Promise<SaintOutPut> {
+export async function restoreSaint(id: number): Promise<SaintOutput> {
   let restoredSaint = {};
   try {
     restoredSaint = await restoreOne('saints', id);
