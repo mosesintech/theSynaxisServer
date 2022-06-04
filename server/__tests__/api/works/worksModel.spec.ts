@@ -5,6 +5,8 @@ import {
   getWorks,
   addWork,
   updateWork,
+  deleteWork,
+  restoreWork,
 } from '../../../api/works/worksModel';
 
 describe('Works Data Model Functions', () => {
@@ -127,6 +129,58 @@ describe('Works Data Model Functions', () => {
         };
         await expect(() => updateWork(updatedWork)).rejects.toThrow(
           'Error updating item: Error: Undefined binding(s) detected when compiling UPDATE. Undefined column(s): [id] query: update "works" set "title" = ?, "published_date" = ?, "modified_at" = CURRENT_TIMESTAMP where "id" = ?'
+        );
+      });
+    });
+  });
+
+  describe('deleteWork', () => {
+    test('deleteWork: success', async () => {
+      const id = 2;
+      const result = await deleteWork(id);
+      expect(result.id).toEqual(2);
+      expect(result.createdAt).not.toEqual(result.modifiedAt);
+      expect(result.isDeleted).toEqual(true);
+    });
+
+    describe('deleteWork: failures', () => {
+      test('deleteWork failure: ID does not exist', async () => {
+        const id = 10;
+        await expect(() => deleteWork(id)).rejects.toThrow(
+          'Work does not exist'
+        );
+      });
+
+      test('deleteWork failure: Item is already deleted', async () => {
+        const id = 2;
+        await expect(() => deleteWork(id)).rejects.toThrow(
+          'Work already deleted'
+        );
+      });
+    });
+  });
+
+  describe('restoreWork', () => {
+    test('restoreWork: success', async () => {
+      const id = 2;
+      const result = await restoreWork(id);
+      expect(result.id).toEqual(2);
+      expect(result.createdAt).not.toEqual(result.modifiedAt);
+      expect(result.isDeleted).toEqual(false);
+    });
+
+    describe('restoreWork: failures', () => {
+      test('restoreWork failure: ID does not exist', async () => {
+        const id = 10;
+        await expect(() => restoreWork(id)).rejects.toThrow(
+          'Work does not exist'
+        );
+      });
+
+      test('restoreWork failure: Item is already deleted', async () => {
+        const id = 2;
+        await expect(() => restoreWork(id)).rejects.toThrow(
+          'Work already deleted'
         );
       });
     });

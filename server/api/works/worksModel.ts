@@ -1,4 +1,11 @@
-import { findOne, findAll, addOne, updateOne } from '../../data/dataModel';
+import {
+  findOne,
+  findAll,
+  addOne,
+  updateOne,
+  deleteOne,
+  restoreOne,
+} from '../../data/dataModel';
 import {
   DbToGQLTransformWorkData,
   GQLToDbTransformWorkData,
@@ -55,4 +62,38 @@ export async function updateWork(work: WorkInput): Promise<WorkOutput> {
   const addedWork = await updateOne('works', dbWork);
   const gqlWork = DbToGQLTransformWorkData(addedWork);
   return gqlWork;
+}
+
+export async function deleteWork(id: number): Promise<WorkOutput> {
+  let deletedWork = {};
+  try {
+    deletedWork = await deleteOne('works', id);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
+    const doesNotExist = 'Item does not exist';
+    throw new Error(
+      `Work ${
+        error.message === doesNotExist ? 'does not exist' : 'already deleted'
+      }`
+    );
+  }
+  const transformedWork = DbToGQLTransformWorkData(deletedWork);
+  return transformedWork;
+}
+
+export async function restoreWork(id: number): Promise<WorkOutput> {
+  let restoredWork = {};
+  try {
+    restoredWork = await restoreOne('works', id);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
+    const doesNotExist = 'Item does not exist';
+    throw new Error(
+      `Work ${
+        error.message === doesNotExist ? 'does not exist' : 'already deleted'
+      }`
+    );
+  }
+  const transformedWork = DbToGQLTransformWorkData(restoredWork);
+  return transformedWork;
 }
