@@ -1,6 +1,11 @@
 import { format } from 'date-fns';
 import knex from '../../../data/dbConfig';
-import { getWork, getWorks, addWork } from '../../../api/works/worksModel';
+import {
+  getWork,
+  getWorks,
+  addWork,
+  updateWork,
+} from '../../../api/works/worksModel';
 
 describe('Works Data Model Functions', () => {
   beforeAll(async () => {
@@ -77,7 +82,7 @@ describe('Works Data Model Functions', () => {
     });
 
     describe('addWork failures', () => {
-      test('addSaint failure: Missing Title', async () => {
+      test('addWork failure: Missing Title', async () => {
         const work = {
           publishedDate: '',
           saintId: 2,
@@ -87,13 +92,41 @@ describe('Works Data Model Functions', () => {
         );
       });
 
-      test('addSaint failure: Missing Saint ID', async () => {
+      test('addWork failure: Missing Saint ID', async () => {
         const work = {
           title: '',
           publishedDate: '',
         };
         await expect(() => addWork(work)).rejects.toThrow(
           'Error adding item: error: insert into "works" ("created_at", "is_deleted", "modified_at", "published_date", "saint_id", "title") values (DEFAULT, DEFAULT, DEFAULT, $1, DEFAULT, $2) returning "id" - null value in column "saint_id" violates not-null constraint'
+        );
+      });
+    });
+  });
+
+  describe('Update Works', () => {
+    test('updateWork: success', async () => {
+      const updatedWork = {
+        id: 2,
+        title: 'Newly Published Letter of Saint Joseph',
+        publishedDate: '6/4/22',
+      };
+      const result = await updateWork(updatedWork);
+      expect(result.id).toEqual(2);
+      expect(result.title).toEqual('Newly Published Letter of Saint Joseph');
+      expect(result.publishedDate).toEqual('6/4/22');
+      expect(result.createdAt).not.toEqual(result.modifiedAt);
+      expect(result.isDeleted).toEqual(false);
+    });
+
+    describe('updateWork failures', () => {
+      test('updateWork failure: Missing ID', async () => {
+        const updatedWork = {
+          title: 'Newly Published Letter of Saint Joseph',
+          publishedDate: '6/4/22',
+        };
+        await expect(() => updateWork(updatedWork)).rejects.toThrow(
+          'Error updating item: Error: Undefined binding(s) detected when compiling UPDATE. Undefined column(s): [id] query: update "works" set "title" = ?, "published_date" = ?, "modified_at" = CURRENT_TIMESTAMP where "id" = ?'
         );
       });
     });

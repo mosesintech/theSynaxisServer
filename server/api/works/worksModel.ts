@@ -1,4 +1,4 @@
-import { findOne, findAll, addOne } from '../../data/dataModel';
+import { findOne, findAll, addOne, updateOne } from '../../data/dataModel';
 import {
   DbToGQLTransformWorkData,
   GQLToDbTransformWorkData,
@@ -46,6 +46,13 @@ export async function getWork(id: number): Promise<WorkOutput> {
 export async function addWork(work: WorkInput): Promise<WorkOutput> {
   const dbWork = GQLToDbTransformWorkData(work);
   const addedWork = await addOne('works', dbWork);
+  const gqlWork = DbToGQLTransformWorkData(addedWork);
+  return gqlWork;
+}
+
+export async function updateWork(work: WorkInput): Promise<WorkOutput> {
+  const dbWork = GQLToDbTransformWorkData(work);
+  const addedWork = await updateOne('works', dbWork);
   const gqlWork = DbToGQLTransformWorkData(addedWork);
   return gqlWork;
 }
