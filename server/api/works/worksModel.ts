@@ -1,5 +1,8 @@
-import { findOne, findAll } from '../../data/dataModel';
-import { DbToGQLTransformWorkData } from './worksFunctions';
+import { findOne, findAll, addOne } from '../../data/dataModel';
+import {
+  DbToGQLTransformWorkData,
+  GQLToDbTransformWorkData,
+} from './worksFunctions';
 
 type Work = { [key: string]: undefined | number | string | boolean };
 
@@ -38,4 +41,11 @@ export async function getWork(id: number): Promise<WorkOutput> {
   }
   const transformedWork = DbToGQLTransformWorkData(work);
   return transformedWork;
+}
+
+export async function addWork(work: WorkInput): Promise<WorkOutput> {
+  const dbWork = GQLToDbTransformWorkData(work);
+  const addedWork = await addOne('works', dbWork);
+  const gqlWork = DbToGQLTransformWorkData(addedWork);
+  return gqlWork;
 }
