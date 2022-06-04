@@ -4,7 +4,7 @@ import {
   GraphQLInt,
   GraphQLBoolean,
 } from 'graphql';
-import SaintType from '../../types';
+import { SaintType } from '../../types';
 import { addSaint } from '../saintsModel';
 
 type Args = {

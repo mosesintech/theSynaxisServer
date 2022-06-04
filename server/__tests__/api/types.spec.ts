@@ -1,5 +1,5 @@
 import { GraphQLID, GraphQLString, GraphQLBoolean, GraphQLInt } from 'graphql';
-import SaintType from '../../api/types';
+import { SaintType, WorkType } from '../../api/types';
 
 describe('GraphQL Types', () => {
   test('Saint Type', () => {
@@ -24,6 +24,18 @@ describe('GraphQL Types', () => {
     expect(fields.isMonk.type).toEqual(GraphQLBoolean);
     expect(fields.isMarried.type).toEqual(GraphQLBoolean);
     expect(fields.isMale.type).toEqual(GraphQLBoolean);
+    expect(fields.createdAt.type).toEqual(GraphQLString);
+    expect(fields.modifiedAt.type).toEqual(GraphQLString);
+    expect(fields.isDeleted.type).toEqual(GraphQLBoolean);
+  });
+
+  test('Work Type', () => {
+    const fields = WorkType.getFields();
+    expect(WorkType.name).toEqual('WorkType');
+    expect(fields.id.type).toEqual(GraphQLID);
+    expect(fields.title.type).toEqual(GraphQLString);
+    expect(fields.publishedDate.type).toEqual(GraphQLString);
+    expect(fields.saintId.type).toEqual(GraphQLID);
     expect(fields.createdAt.type).toEqual(GraphQLString);
     expect(fields.modifiedAt.type).toEqual(GraphQLString);
     expect(fields.isDeleted.type).toEqual(GraphQLBoolean);

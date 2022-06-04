@@ -1,5 +1,5 @@
 import { GraphQLList } from 'graphql';
-import SaintType from '../../types';
+import { SaintType } from '../../types';
 import { getSaints } from '../saintsModel';
 
 const getSaintsQuery = {

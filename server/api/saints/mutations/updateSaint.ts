@@ -5,7 +5,7 @@ import {
   GraphQLBoolean,
   GraphQLID,
 } from 'graphql';
-import SaintType from '../../types';
+import { SaintType } from '../../types';
 import { updateSaint } from '../saintsModel';
 
 type Args = {

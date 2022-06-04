@@ -6,7 +6,7 @@ import {
   GraphQLInt,
 } from 'graphql';
 
-const SaintType = new GraphQLObjectType({
+export const SaintType = new GraphQLObjectType({
   name: 'SaintType',
   fields: () => ({
     id: { type: GraphQLID },
@@ -34,4 +34,15 @@ const SaintType = new GraphQLObjectType({
   }),
 });
 
-export default SaintType;
+export const WorkType = new GraphQLObjectType({
+  name: 'WorkType',
+  fields: () => ({
+    id: { type: GraphQLID },
+    title: { type: GraphQLString },
+    publishedDate: { type: GraphQLString },
+    saintId: { type: GraphQLID },
+    createdAt: { type: GraphQLString },
+    modifiedAt: { type: GraphQLString },
+    isDeleted: { type: GraphQLBoolean },
+  }),
+});

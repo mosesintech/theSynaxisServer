@@ -1,5 +1,5 @@
 import { GraphQLNonNull, GraphQLID } from 'graphql';
-import SaintType from '../../types';
+import { SaintType } from '../../types';
 import { deleteSaint } from '../saintsModel';
 
 const deleteSaintMutation = {

@@ -1,5 +1,5 @@
 import { GraphQLNonNull, GraphQLID } from 'graphql';
-import SaintType from '../../types';
+import { SaintType } from '../../types';
 import { restoreSaint } from '../saintsModel';
 
 const restoreSaintMutation = {
