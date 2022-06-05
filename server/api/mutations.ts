@@ -5,6 +5,12 @@ import {
   deleteSaintMutation,
   restoreSaintMutation,
 } from './saints/mutations';
+import {
+  addWorkMutation,
+  updateWorkMutation,
+  deleteWorkMutation,
+  restoreWorkMutation,
+} from './works/mutations';
 
 const mutations = new GraphQLObjectType({
   name: 'Mutations',
@@ -13,6 +19,10 @@ const mutations = new GraphQLObjectType({
     updateSaintMutation,
     deleteSaintMutation,
     restoreSaintMutation,
+    addWorkMutation,
+    updateWorkMutation,
+    deleteWorkMutation,
+    restoreWorkMutation,
   },
 });
 
