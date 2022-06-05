@@ -103,6 +103,17 @@ describe('Works Data Model Functions', () => {
           'Error adding item: error: insert into "works" ("created_at", "is_deleted", "modified_at", "published_date", "saint_id", "title") values (DEFAULT, DEFAULT, DEFAULT, $1, DEFAULT, $2) returning "id" - null value in column "saint_id" violates not-null constraint'
         );
       });
+
+      test('addWork failure: Incorrect Saint ID', async () => {
+        const work = {
+          title: '',
+          publishedDate: '',
+          saintId: 200,
+        };
+        await expect(() => addWork(work)).rejects.toThrow(
+          'Error adding item: error: insert into "works" ("created_at", "is_deleted", "modified_at", "published_date", "saint_id", "title") values (DEFAULT, DEFAULT, DEFAULT, $1, $2, $3) returning "id" - insert or update on table "works" violates foreign key constraint "works_saint_id_foreign"'
+        );
+      });
     });
   });
 
