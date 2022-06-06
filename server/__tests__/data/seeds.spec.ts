@@ -57,9 +57,25 @@ describe('Seed Tests', () => {
     expect(result.length).toEqual(1);
     expect(result[0].publication_city).toEqual('Florence, Arizona');
     expect(result[0].publication_year).toEqual('1999');
-    expect(result[0].page_start).toEqual('');
-    expect(result[0].page_end).toEqual('');
+    expect(result[0].page_start).toEqual('83');
+    expect(result[0].page_end).toEqual('83');
     expect(result[0].work_id).toEqual(1);
+    expect(format(result[0].created_at, 'MMMM dd, yyyy')).toEqual(timestamp);
+    expect(result[0].modified_at).toEqual(result[0].created_at);
+    expect(result[0].is_deleted).toEqual(false);
+  });
+
+  test('should run quotes seed', async () => {
+    const timestamp = format(new Date(), 'MMMM dd, yyyy');
+    const result = await knex('quotes');
+
+    expect(result.length).toEqual(1);
+    expect(result[0].quote_text).toEqual(
+      "Then you are filled with divine love and your soul burns as did Cleopas's. And in times of temptation you no longer leave the linen cloth and flee naked, but persevere in afflictions with the thought that just as one temptation passed after another, so, too, will this one pass."
+    );
+    expect(result[0].saint_id).toEqual(2);
+    expect(result[0].work_id).toEqual(1);
+    expect(result[0].citation_id).toEqual(1);
     expect(format(result[0].created_at, 'MMMM dd, yyyy')).toEqual(timestamp);
     expect(result[0].modified_at).toEqual(result[0].created_at);
     expect(result[0].is_deleted).toEqual(false);

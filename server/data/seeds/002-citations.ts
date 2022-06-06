@@ -7,8 +7,8 @@ export async function seed(knex: Knex): Promise<void> {
     {
       publication_city: 'Florence, Arizona',
       publication_year: '1999',
-      page_start: '',
-      page_end: '',
+      page_start: '83',
+      page_end: '83',
       work_id: 1,
     },
   ]);

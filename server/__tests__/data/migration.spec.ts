@@ -21,6 +21,11 @@ describe('Migration Tests', () => {
     expect(result.length).toBe(0);
   });
 
+  test('should run quotes migration', async () => {
+    const result = await knex('quotes');
+    expect(result.length).toBe(0);
+  });
+
   afterAll(async () => {
     await knex.migrate.rollback();
     await knex.destroy();
