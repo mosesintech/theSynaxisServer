@@ -50,6 +50,21 @@ describe('Seed Tests', () => {
     expect(result[0].is_deleted).toEqual(false);
   });
 
+  test('should run citations seed', async () => {
+    const timestamp = format(new Date(), 'MMMM dd, yyyy');
+    const result = await knex('citations');
+
+    expect(result.length).toEqual(1);
+    expect(result[0].publication_city).toEqual('Florence, Arizona');
+    expect(result[0].publication_year).toEqual('1999');
+    expect(result[0].page_start).toEqual('');
+    expect(result[0].page_end).toEqual('');
+    expect(result[0].work_id).toEqual(1);
+    expect(format(result[0].created_at, 'MMMM dd, yyyy')).toEqual(timestamp);
+    expect(result[0].modified_at).toEqual(result[0].created_at);
+    expect(result[0].is_deleted).toEqual(false);
+  });
+
   afterAll(async () => {
     await knex.migrate.rollback();
     await knex.destroy();

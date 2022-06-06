@@ -16,6 +16,11 @@ describe('Migration Tests', () => {
     expect(result.length).toBe(0);
   });
 
+  test('should run citations migration', async () => {
+    const result = await knex('citations');
+    expect(result.length).toBe(0);
+  });
+
   afterAll(async () => {
     await knex.migrate.rollback();
     await knex.destroy();
