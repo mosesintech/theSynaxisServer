@@ -26,6 +26,13 @@ describe('Migration Tests', () => {
     expect(result.length).toBe(0);
   });
 
+  // qcategories is not a typo. This is for quote categories.
+  // there may be other kinds of categories in the future.
+  test('should run qcategories migration', async () => {
+    const result = await knex('qcategories');
+    expect(result.length).toBe(0);
+  });
+
   afterAll(async () => {
     await knex.migrate.rollback();
     await knex.destroy();
