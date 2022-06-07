@@ -45,6 +45,12 @@ describe('Migration Tests', () => {
     expect(result.length).toBe(0);
   });
 
+  // many-to-many
+  test('should run works_wgenres migration', async () => {
+    const result = await knex('works_wgenres');
+    expect(result.length).toBe(0);
+  });
+
   afterAll(async () => {
     await knex.migrate.rollback();
     await knex.destroy();
