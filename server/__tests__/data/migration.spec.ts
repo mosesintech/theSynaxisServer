@@ -33,6 +33,12 @@ describe('Migration Tests', () => {
     expect(result.length).toBe(0);
   });
 
+  // many-to-many
+  test('should run quotes_qcategories migration', async () => {
+    const result = await knex('quotes_qcategories');
+    expect(result.length).toBe(0);
+  });
+
   afterAll(async () => {
     await knex.migrate.rollback();
     await knex.destroy();
