@@ -51,6 +51,11 @@ describe('Migration Tests', () => {
     expect(result.length).toBe(0);
   });
 
+  test('should run users migration', async () => {
+    const result = await knex('users');
+    expect(result.length).toBe(0);
+  });
+
   afterAll(async () => {
     await knex.migrate.rollback();
     await knex.destroy();

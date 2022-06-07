@@ -127,6 +127,32 @@ describe('Seed Tests', () => {
     expect(result[0].is_deleted).toEqual(false);
   });
 
+  test('should run users seed', async () => {
+    const timestamp = format(new Date(), 'MMMM dd, yyyy');
+    const result = await knex('users');
+
+    expect(result.length).toEqual(1);
+    expect(result[0].username).toEqual('Jeb');
+    expect(result[0].email).toEqual('jeb@bush.com');
+    expect(result[0].password).toEqual('pleaseClap2016');
+    expect(result[0].first_name).toEqual('Jeb');
+    expect(result[0].last_name).toEqual('Bush');
+    expect(result[0].denomination).toEqual('Roman Catholic');
+    expect(result[0].is_bishop).toEqual(false);
+    expect(result[0].is_priest).toEqual(false);
+    expect(result[0].is_deacon).toEqual(false);
+    expect(result[0].is_male).toEqual(true);
+    expect(result[0].patron).toEqual(null);
+    expect(result[0].bio).toEqual(null);
+    expect(result[0].birthday).toEqual(null);
+    expect(result[0].nameday).toEqual(null);
+    expect(result[0].location).toEqual(null);
+    expect(result[0].jurisdiction).toEqual(null);
+    expect(format(result[0].joined_date, 'MMMM dd, yyyy')).toEqual(timestamp);
+    expect(result[0].modified_at).toEqual(result[0].joined_date);
+    expect(result[0].is_deleted).toEqual(false);
+  });
+
   afterAll(async () => {
     await knex.migrate.rollback();
     await knex.destroy();
