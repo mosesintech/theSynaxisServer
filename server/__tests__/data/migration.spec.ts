@@ -39,6 +39,12 @@ describe('Migration Tests', () => {
     expect(result.length).toBe(0);
   });
 
+  // work genres
+  test('should run wgenres migration', async () => {
+    const result = await knex('wgenres');
+    expect(result.length).toBe(0);
+  });
+
   afterAll(async () => {
     await knex.migrate.rollback();
     await knex.destroy();

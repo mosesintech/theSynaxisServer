@@ -104,6 +104,17 @@ describe('Seed Tests', () => {
     expect(result[0].is_deleted).toEqual(false);
   });
 
+  test('should run wgenres seed', async () => {
+    const timestamp = format(new Date(), 'MMMM dd, yyyy');
+    const result = await knex('wgenres');
+
+    expect(result.length).toEqual(1);
+    expect(result[0].name).toEqual('monastic');
+    expect(format(result[0].created_at, 'MMMM dd, yyyy')).toEqual(timestamp);
+    expect(result[0].modified_at).toEqual(result[0].created_at);
+    expect(result[0].is_deleted).toEqual(false);
+  });
+
   afterAll(async () => {
     await knex.migrate.rollback();
     await knex.destroy();
